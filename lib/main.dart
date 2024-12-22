@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:to_do_app/Task.dart';
+import 'package:to_do_app/addtask.dart';
+import 'package:to_do_app/box.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskAdapter());
+  taskbox = await Hive.openBox('task_box');
   runApp(const todo_app());
 }
 
@@ -22,7 +29,26 @@ class _todo_appState extends State<todo_app> {
         body: const Center(
           child: Text('Hello World'),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showBottomSheet(context);
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
+}
+
+void showBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        height: 200,
+        color: Colors.white,
+        child: Addtask(),
+      );
+    },
+  );
 }
