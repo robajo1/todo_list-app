@@ -6,7 +6,33 @@ class Addtask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Add Task"),
+      height: double.infinity,
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      child: Form(
+          child: Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Task name',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            maxLines: 4,
+            decoration: const InputDecoration(
+              labelText: 'Description',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Add Task'),
+          ),
+        ],
+      )),
     );
   }
 }

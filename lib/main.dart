@@ -8,7 +8,11 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskAdapter());
   taskbox = await Hive.openBox('task_box');
-  runApp(const todo_app());
+  runApp(
+    MaterialApp(
+      home: todo_app(),
+    ),
+  );
 }
 
 class todo_app extends StatefulWidget {
@@ -21,20 +25,18 @@ class todo_app extends StatefulWidget {
 class _todo_appState extends State<todo_app> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('To-Do App'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showBottomSheet(context);
-          },
-          child: const Icon(Icons.add),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('To-Do App'),
+      ),
+      body: const Center(
+        child: Text('Hello World'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showBottomSheet(context);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -44,11 +46,7 @@ void showBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
-      return Container(
-        height: 200,
-        color: Colors.white,
-        child: Addtask(),
-      );
+      return Addtask();
     },
   );
 }
