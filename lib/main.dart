@@ -3,6 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:to_do_app/Task.dart';
 import 'package:to_do_app/addtask.dart';
 import 'package:to_do_app/box.dart';
+import 'package:to_do_app/list_task.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -10,6 +11,10 @@ void main() async {
   taskbox = await Hive.openBox('task_box');
   runApp(
     MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+      ),
       home: todo_app(),
     ),
   );
@@ -29,9 +34,7 @@ class _todo_appState extends State<todo_app> {
       appBar: AppBar(
         title: const Text('To-Do App'),
       ),
-      body: const Center(
-        child: Text('Hello World'),
-      ),
+      body: ListTask(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showBottomSheet(context);
